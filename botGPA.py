@@ -8,7 +8,7 @@ from aiogram.utils.exceptions import BotBlocked, ChatNotFound
 
 # ================== KONFIGURATSIYA ==================
 # ✅ TOKEN ENDI RAILWAY VARIABLE'DAN O'QILADI
-API_TOKEN = os.environ.get("BOT_TOKEN", "")  # BU QATOR ALMASHTIRILDI
+API_TOKEN = os.environ.get("BOT_TOKEN", "7737349351:AAH-JwmPNkj4EQ9dYBq3ALLG8PVuCf8UTHc")  # BU QATOR ALMASHTIRILDI
 CHANNEL_USERNAME = "@alimovsarvar2"
 MAX_USERS = 100
 ADMIN_ID = 123456789  # O'Z ADMIN ID'INGIZNI QO'YING
