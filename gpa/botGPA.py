@@ -1,4 +1,5 @@
 import logging
+import os  # ✅ BU QATOR QO'SHILDI
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.dispatcher import FSMContext
@@ -6,14 +7,20 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.utils.exceptions import BotBlocked, ChatNotFound
 
 # ================== KONFIGURATSIYA ==================
-API_TOKEN = "7737349351:AAH-JwmPNkj4EQ9dYBq3ALLG8PVuCf8UTHc"
+# ✅ TOKEN ENDI RAILWAY VARIABLE'DAN O'QILADI
+API_TOKEN = os.environ.get("BOT_TOKEN", "7737349351:AAH-JwmPNkj4EQ9dYBq3ALLG8PVuCf8UTHc")  # BU QATOR ALMASHTIRILDI
 CHANNEL_USERNAME = "@alimovsarvar2"
 MAX_USERS = 100
-ADMIN_ID = 123456789
+ADMIN_ID = 123456789  # O'Z ADMIN ID'INGIZNI QO'YING
 
 # Logging sozlash
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+# Token tekshirish
+if not API_TOKEN:
+    logger.error("❌ BOT_TOKEN topilmadi! Railway Variables ga qo'shing")
+    exit(1)
 
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot, storage=MemoryStorage())
@@ -21,7 +28,7 @@ dp = Dispatcher(bot, storage=MemoryStorage())
 # ================== STATES ==================
 class Form(StatesGroup):
     choose_language = State()
-    choose_university = State()  # YANGI STATE
+    choose_university = State()
     choose_calc = State()
     choose_subjects = State()
     enter_score = State()
@@ -503,6 +510,7 @@ async def unknown_message(message: types.Message):
 # ================== BOTNI ISHGA TUSHIRISH ==================
 if __name__ == '__main__':
     logger.info("Bot ishga tushmoqda...")
+    logger.info(f"Token mavjud: {'✅' if API_TOKEN else '❌'}")
     try:
         executor.start_polling(dp, skip_updates=True)
     except KeyboardInterrupt:
